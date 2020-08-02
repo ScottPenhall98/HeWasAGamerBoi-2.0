@@ -48,32 +48,21 @@ interface consoleData {
 
 function getData(): ChartData {
     let labels: Array<string> = []
-    let allData: consoleData = {}
-    //TODO in or of
-    
+    let allData: consoleData = {} 
     for(let cell of data.scottsConsoleData){
         let currentConsole: string = cell["console-name"]
         let currentPrice: number = cell["price-in-pennies"]
         let splitText: Array<string> = currentConsole.split("PAL ")
         if(splitText.length > 1){
-            //Check if it exists in labels
             [allData, labels] = checkIfNewItemExists(labels,allData,splitText[1], currentPrice)
-            // allData = result[0]
-            // labels = result[1]
         }else{
-            //Check if it exists in labels
             [allData, labels] = checkIfNewItemExists(labels, allData, splitText[0], currentPrice)
-            // allData = result[0]
-            // labels = result[1]
-            
         }
     }
     let dataInOrder: Array<number> = []
-    // console.log(labels)
     for(let label of labels){
         dataInOrder.push(allData[label])
     }
-    // console.log(dataInOrder)
     let dataset: ChartDataSets = {
         label: '',
         backgroundColor: 'purple',
