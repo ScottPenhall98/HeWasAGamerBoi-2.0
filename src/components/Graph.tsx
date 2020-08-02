@@ -57,12 +57,14 @@ function getData(): ChartData {
         let splitText: Array<string> = currentConsole.split("PAL ")
         if(splitText.length > 1){
             //Check if it exists in labels
-            let result= checkIfNewItemExists(labels,allData,splitText[1], currentPrice)
-            allData = result[0]
-            labels = result[1]
+            [allData, labels] = checkIfNewItemExists(labels,allData,splitText[1], currentPrice)
+            // allData = result[0]
+            // labels = result[1]
         }else{
             //Check if it exists in labels
             [allData, labels] = checkIfNewItemExists(labels, allData, splitText[0], currentPrice)
+            // allData = result[0]
+            // labels = result[1]
             
         }
     }
@@ -93,16 +95,10 @@ function checkIfNewItemExists(labels: Array<string>, allData: consoleData, curre
         for(let i = 0; i < labels.length; i++){
             if(currentConsole === labels[i]){
                 allData[labels[i]] = priceConvert(price, allData[labels[i]])
-                if (allData[labels[i]] === NaN) {
-                    console.log(labels[i])
-                }
                 break
             } else if (i === labels.length - 1){
                 labels.push(currentConsole)
-                allData[labels[i]] = priceConvert(price, 0)
-                if (allData[labels[i]] === NaN){
-                    console.log(labels[i])
-                }
+                allData[currentConsole] = priceConvert(price, 0)
             }
         }
     }
