@@ -7,10 +7,10 @@ class Graph extends React.Component{
         this.buildGraph()
     }
     buildGraph() {
-        let barChartData = getData()
+        let barChartData = getData('./collection.json', false)
         //bad code 
-        let canvas = this.refs!.canvas as HTMLCanvasElement
-        let ctx = canvas.getContext('2d')!
+        let canvas = this.refs!.canvas as HTMLCanvasElement;
+        let ctx = canvas.getContext('2d')!;
         new Chart(ctx, {
             type: 'bar',
             data: barChartData,
